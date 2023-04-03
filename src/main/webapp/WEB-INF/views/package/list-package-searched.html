@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of packages searched</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        table, th, td, tr {
+            border-collapse: collapse;
+            border: 2px solid;
+        }
+
+        #button1 {
+            width: 100px;
+            height: 30px;
+            font-size: 15px;
+            background-color: #fec84a;
+            border-radius: 4px;
+            float: right;
+        }
+
+        #button2 {
+            width: 60px;
+            height: 20px;
+            font-size: 12px;
+            background-color: #85c9e8;
+            border-radius: 3px;
+        }
+
+        .list-view {
+            text-decoration: none;
+            background-color: #04AA6D;
+            color: white;
+            padding: 8px 10px;
+            margin: 8px 0;
+            border: 1px solid black;
+            cursor: pointer;
+            width: 90px;
+        }
+    </style>
+</head>
+<body>
+<a href="/nashtech/show-deliver-package">
+    <button class="list-view" type="button">Deliver Package</button>
+</a>
+<h1 style="text-align: center">List of packages searched</h1>
+<table align="center" width="50%">
+    <tr>
+        <th>ID</th>
+        <th>Sender</th>
+        <th>Sender Email</th>
+        <th>Status</th>
+        <th></th>
+    </tr>
+    <tr th:each="package : ${listPackage}">
+        <td th:text="${package.id}"></td>
+        <td th:text="${package.sender}"></td>
+        <td th:text="${package.senderEmail}"></td>
+        <td th:text="${package.status}"></td>
+        <td style="text-align: center; width: 80px">
+            <a th:href="@{/deliver-package/__${package.id}__}">
+                <button id="button2" onclick="alert('Successful delivery')">Delivery</button>
+            </a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Config Cabinet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        table, th, td, tr {
+            border-collapse: collapse;
+            border: 2px solid;
+        }
+
+        #button1 {
+            width: 100px;
+            height: 30px;
+            font-size: 15px;
+            background-color: #fec84a;
+            border-radius: 4px;
+            float: right;
+        }
+
+        #button2 {
+            width: 100px;
+            height: 20px;
+            font-size: 12px;
+            background-color: #85c9e8;
+            border-radius: 3px;
+        }
+
+        #button3 {
+            width: 60px;
+            height: 20px;
+            font-size: 12px;
+            background-color: #85c9e8;
+            border-radius: 3px;
+        }
+
+        .list-view {
+            text-decoration: none;
+            background-color: #04AA6D;
+            color: white;
+            padding: 8px 10px;
+            margin: 8px 0;
+            border: 1px solid black;
+            cursor: pointer;
+            width: 90px;
+        }
+    </style>
+</head>
+<body>
+<a class="list-view" href="/nashtech/management">Back to Management</a>
+<a href="/nashtech/create-cabinet-form">
+    <button id="button1" type="button">Add Cabinet</button>
+</a>
+<br/>
+<h1 style="text-align: center">Cabinets List</h1>
+<table align="center" width="50%">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Height</th>
+        <th>Width</th>
+        <th>Length</th>
+        <th>Storage ID</th>
+        <th></th>
+    </tr>
+    <tr th:each="cabinet : ${list}">
+        <td th:text="${cabinet.id}"></td>
+        <td th:text="${cabinet.cabinetName}"></td>
+        <td th:text="${cabinet.height}"></td>
+        <td th:text="${cabinet.width}"></td>
+        <td th:text="${cabinet.length}"></td>
+        <td th:text="${cabinet.storageId}"></td>
+        <td style="text-align: center; width: 80px"><a href="/nashtech/cell">
+            <button id="button2">Detail Cabinet</button>
+        </a></td>
+        <td style="text-align: center; width: 80px"><a th:href="@{/delete-cabinet/__${cabinet.id}__}">
+            <button id="button3">Delete</button>
+        </a></td>
+    </tr>
+</table>
+</body>
+</html>

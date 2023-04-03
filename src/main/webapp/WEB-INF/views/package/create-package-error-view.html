@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add packages</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        button {
+            background-color: #fec84a;
+            border: 1px solid black;
+            padding: 14px 20px;
+            margin: 8px 3px;
+            cursor: pointer;
+            width: 258px;
+            border-radius: 4px;
+            float: right;
+        }
+
+        button:hover, .list-view:hover {
+            opacity: 0.8;
+        }
+
+        .list-view {
+            text-decoration: none;
+            background-color: #04AA6D;
+            color: white;
+            padding: 8px 10px;
+            margin: 8px 0;
+            border: 1px solid black;
+            cursor: pointer;
+            width: 90px;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+            font-size: small;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+<a class="list-view" href="/nashtech/packages">List Package</a><br/>
+<h1 style="text-align: center">Add new Packages</h1>
+<form method="post" th:action="@{/create-package}" th:object="${package}">
+    <table align="center">
+        <tr>
+            <td>Length</td>
+            <td><input onfocus="this.value=''" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Length must be decimal')" pattern="^[0-9]+(.[0-9]+)?$"
+                       placeholder="Enter Length" required th:field="*{length}"
+                       type="text"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td th:if="${!packageLengthValidate.isEmpty()}"><p class="error" th:text="${packageLengthValidate}"></p>
+            </td>
+        </tr>
+        <tr>
+            <td>Width</td>
+            <td><input onfocus="this.value=''" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Width must be decimal')" pattern="^[0-9]+(.[0-9]+)?$"
+                       placeholder="Enter Width" required th:field="*{width}"
+                       type="text"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td th:if="${!packageWidthValidate.isEmpty()}"><p class="error" th:text="${packageWidthValidate}"></p></td>
+        </tr>
+        <tr>
+            <td>Height</td>
+            <td><input onfocus="this.value=''" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Height must be decimal')" pattern="^[0-9]+(.[0-9]+)?$"
+                       placeholder="Enter Height" required th:field="*{height}"
+                       type="text"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td th:if="${!packageHeightValidate.isEmpty()}"><p class="error" th:text="${packageHeightValidate}"></p>
+            </td>
+        </tr>
+        <tr>
+            <td>Sender</td>
+            <td><input placeholder="Enter Sender" required th:field="*{sender}" type="text"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td th:if="${!packageSenderValidate.isEmpty()}"><p class="error" th:text="${packageSenderValidate}"></p>
+            </td>
+        </tr>
+        <tr>
+            <td>Sender Email</td>
+            <td><input placeholder="Enter Sender Email" required th:field="*{senderEmail}" type="text"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td th:if="${!packageSenderEmailValidate.isEmpty()}"><p class="error"
+                                                                    th:text="${packageSenderEmailValidate}"></p></td>
+        </tr>
+        <tr>
+            <td>Cell ID</td>
+            <td><input onfocus="this.value=''" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Cell ID must be positive integer')" pattern="^[0-9]+$"
+                       placeholder="Enter Cell ID" required
+                       th:field="*{cellId}" type="text"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td th:if="${!packageCellIDValidate.isEmpty()}"><p class="error" th:text="${packageCellIDValidate}"></p>
+            </td>
+        </tr>
+        <tr>
+            <td>Customer ID</td>
+            <td><input onfocus="this.value=''" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Customer ID must be positive integer ')" pattern="^[0-9]+$"
+                       placeholder="Enter Customer ID"
+                       required th:field="*{customerId}"
+                       type="text"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td th:if="${!packageCustomerIDValidate.isEmpty()}"><p class="error"
+                                                                   th:text="${packageCustomerIDValidate}"></p></td>
+        </tr>
+        <tr>
+            <td>Created At</td>
+            <td><input required th:field="*{createAt}" type="date"/></td>
+        </tr>
+        <tr>
+            <td>Modified At</td>
+            <td><input required th:field="*{modifiedAt}" type="date"/></td>
+        </tr>
+        <tr>
+            <td>Create By</td>
+            <td><input placeholder="Enter Creator's Name" required th:field="*{createBy}" type="text"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td th:if="${!packageCreatedByValidate.isEmpty()}"><p class="error"
+                                                                  th:text="${packageCreatedByValidate}"></p></td>
+        </tr>
+        <tr>
+            <td>Modified By</td>
+            <td><input placeholder="Enter Editor's Name" required th:field="*{modifiedBy}" type="text"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td th:if="${!packageModifiedByValidate.isEmpty()}"><p class="error"
+                                                                   th:text="${packageModifiedByValidate}"></p></td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td><input placeholder="Enter Status" required th:field="*{status}" type="text"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td th:if="${!packageStatusValidate.isEmpty()}"><p class="error" th:text="${packageStatusValidate}"></p>
+            </td>
+        </tr>
+        <tr>
+            <td>Type</td>
+            <td><input placeholder="Enter Type" required th:field="*{type}" type="text"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td th:if="${!packageTypeValidate.isEmpty()}"><p class="error" th:text="${packageTypeValidate}"></p></td>
+        </tr>
+    </table>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>

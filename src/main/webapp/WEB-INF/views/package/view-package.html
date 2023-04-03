@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Spring MVC + JDBC</title>
+    <style>
+        body{
+            font-family: arial,san serif;
+        }
+        table, th, td {
+            border: 2px solid black;
+
+        }
+        table{
+            border-collapse: collapse;
+            width: auto;
+        }
+
+        td {
+            padding-right: 30px;
+        }
+        th{
+            width: 100px;
+            text-align: center;
+            text: 1rem bold !important;
+        }
+        td:last-child {
+            width: 200px;
+            text-align: center;
+            text: 1px bold;
+        }
+
+        @media (min-width: 768px) {
+            .button-39 {
+                min-width: 80px;
+                padding: 0 25px;
+            }
+        }
+
+        .button-39 {
+            background-color: #FFFFFF;
+            border: 1px solid rgb(209, 213, 219);
+            border-radius: .5rem;
+            box-sizing: border-box;
+            color: #111827;
+            font-family: "Inter var", ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-size: .875rem;
+            font-weight: 600;
+            line-height: 1.25rem;
+            padding: .75rem 1rem;
+            text-align: center;
+            text-decoration: none #D1D5DB solid;
+            text-decoration-thickness: auto;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            height: fit-content;
+            width: fit-content;
+        }
+
+        .button-39:hover {
+            background-color: rgb(249, 250, 251);
+        }
+
+        .button-39:focus {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+        }
+
+        .button-39:focus-visible {
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body style="align-content: center; border : #111827 1px">
+<h1 align="center" style="margin-top: 35px">Detail Package</h1>
+
+<br/>
+<table align="center">
+    <thead>
+    </thead>
+    <tbody th:each="package : ${packages}">
+    <tr>
+        <th>ID:</th>
+        <td th:text="${package.id}"></td>
+    </tr>
+    <tr>
+        <th>height</th>
+        <td th:text="${package.height}"></td>
+    </tr>
+    <tr>
+        <th>width</th>
+        <td th:text="${package.width}"></td>
+    </tr>
+    <tr>
+        <th>length</th>
+        <td th:text="${package.length}"></td>
+    </tr>
+    <tr>
+        <th>Sender Name</th>
+        <td th:text="${package.sender}"></td>
+    </tr>
+    <tr>
+        <th>Sender email</th>
+        <td th:text="${package.senderEmail}"></td>
+    </tr>
+    <tr>
+        <th>cell ID</th>
+        <td th:text="${package.cellId}"></td>
+    </tr>
+    <tr>
+        <th>customer id</th>
+        <td th:text="${package.customerId}"></td>
+    </tr>
+    <tr>
+        <th>created at</th>
+        <td th:text="${package.createAt}"></td>
+    </tr>
+    <tr>
+        <th>modified at</th>
+        <td th:text="${package.modifiedAt}"></td>
+    </tr>
+    <tr>
+        <th>created by</th>
+        <td th:text="${package.createBy}"></td>
+    </tr>
+    <tr>
+        <th>modified by</th>
+        <td th:text="${package.modifiedBy}"></td>
+    </tr>
+    <tr>
+        <th>status</th>
+        <td th:text="${package.status}"></td>
+    </tr>
+    <tr>
+        <th>Type</th>
+        <td th:text="${package.type}"></td>
+    </tr>
+    </tbody>
+</table>
+<div align="center" class="back-button" style="margin-top: 15px">
+    <button align="center" class="button-39" onclick="location.href='/nashtech/packages'" type="button">
+        Back
+    </button>
+</div>
+</body>
+</html>

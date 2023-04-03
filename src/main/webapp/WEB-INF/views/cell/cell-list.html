@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Cell</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        table, th, td {
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding-right: 30px;
+        }
+
+        #button1 {
+            width: 100px;
+            height: 30px;
+            font-size: 15px;
+            background-color: #fec84a;
+            border-radius: 4px;
+            float: right;
+        }
+
+        #button2 {
+            width: 60px;
+            height: 20px;
+            font-size: 12px;
+            background-color: #85c9e8;
+            border-radius: 3px;
+        }
+
+        .list-view {
+            text-decoration: none;
+            background-color: #04AA6D;
+            color: white;
+            padding: 8px 10px;
+            margin: 8px 0;
+            border: 1px solid black;
+            cursor: pointer;
+            width: 90px;
+        }
+    </style>
+</head>
+<body>
+<a class="list-view" href="/nashtech/cabinets">List Cabinet</a>
+<a href="/nashtech/create-cell-form">
+    <button id="button1" type="button">Add Cell</button>
+</a>
+<br/>
+<h1 style="text-align: center">Cells List</h1>
+<table align="center">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Height</th>
+        <th>Width</th>
+        <th>Length</th>
+        <th>Row</th>
+        <th>Column</th>
+        <th>CabinetID</th>
+        <th>Available</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cell : ${list}">
+        <td th:text="${cell.id}"></td>
+        <td th:text="${cell.width}"></td>
+        <td th:text="${cell.length}"></td>
+        <td th:text="${cell.height}"></td>
+        <td th:text="${cell.row}"></td>
+        <td th:text="${cell.column}"></td>
+        <td th:text="${cell.cabinetId}"></td>
+        <td th:text="${cell.available}"></td>
+        <td>
+            <a th:href="@{/delete-cell/__${cell.id}__}">
+                <button id="button2">Delete</button>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

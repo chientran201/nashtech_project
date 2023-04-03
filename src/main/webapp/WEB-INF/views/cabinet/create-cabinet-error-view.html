@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add cabinets</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        button {
+            background-color: #fec84a;
+            border: 1px solid black;
+            padding: 14px 20px;
+            margin: 8px 3px;
+            cursor: pointer;
+            width: 258px;
+            border-radius: 4px;
+            float: right;
+        }
+
+        button:hover, .list-view:hover {
+            opacity: 0.8;
+        }
+
+        .list-view {
+            text-decoration: none;
+            background-color: #04AA6D;
+            color: white;
+            padding: 8px 10px;
+            margin: 8px 0;
+            border: 1px solid black;
+            cursor: pointer;
+            width: 90px;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+            font-size: small;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+<a class="list-view" href="/nashtech/cabinets">List Cabinet</a><br/>
+<h1 style="text-align: center">Add new Cabinets</h1>
+<form method="post" th:action="@{/create-cabinet}" th:object="${cabinet}">
+    <table align="center">
+        <tr>
+            <td>Cabinet Name</td>
+            <td><input placeholder="Enter Cabinet Name" required th:field="*{cabinetName}" type="text"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td th:if="${!cabinetNameValidate.isEmpty()}"><p class="error" th:text="${cabinetNameValidate}"></p></td>
+        </tr>
+        <tr>
+            <td>Length</td>
+            <td><input onfocus="this.value=''" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Length must be decimal')" pattern="^[0-9]+(.[0-9]+)?$"
+                       placeholder="Enter Length" th:field="*{length}"
+                       type="text"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td th:if="${!cabinetLengthValidate.isEmpty()}"><p class="error" th:text="${cabinetLengthValidate}"></p>
+            </td>
+        </tr>
+        <tr>
+            <td>Width</td>
+            <td><input onfocus="this.value=''" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Width must be decimal')" pattern="^[0-9]+(.[0-9]+)?$"
+                       placeholder="Enter Width" th:field="*{width}"
+                       type="text"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td th:if="${!cabinetWidthValidate.isEmpty()}"><p class="error" th:text="${cabinetWidthValidate}"></p></td>
+        </tr>
+        </tr>
+        <tr>
+            <td>Height</td>
+            <td><input onfocus="this.value=''" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Height must be decimal')" pattern="^[0-9]+(.[0-9]+)?$"
+                       placeholder="Enter Height" required th:field="*{height}"
+                       type="text"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td th:if="${!cabinetHeightValidate.isEmpty()}"><p class="error" th:text="${cabinetHeightValidate}"></p>
+            </td>
+        </tr>
+        <tr>
+            <td>Storage ID</td>
+            <td><input onfocus="this.value=''" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Storage ID must be integer')" pattern="^\d+$"
+                       placeholder="Enter Storage ID" required
+                       th:field="*{storageId}" type="text"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td th:if="${!cabinetStorageIDValidate.isEmpty()}"><p class="error"
+                                                                  th:text="${cabinetStorageIDValidate}"></p></td>
+        </tr>
+    </table>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>

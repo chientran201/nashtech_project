@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Package</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        table, th, td {
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding-right: 30px;
+        }
+
+        .button1 {
+            background-color: #fec84a;
+            border: 1px solid black;
+            cursor: pointer;
+            width: 120px;
+            height: 30px;
+            border-radius: 4px;
+            float: right;
+        }
+
+        #button2 {
+            width: 100px;
+            height: 20px;
+            font-size: 12px;
+            background-color: #85c9e8;
+            border-radius: 3px;
+        }
+        #addButton{
+            margin-left: auto ;
+        }
+        .list-view {
+            text-decoration: none;
+            background-color: #04AA6D;
+            color: white;
+            padding: 8px 10px;
+            margin: 8px 0;
+            border: 1px solid black;
+            cursor: pointer;
+            width: 90px;
+        }
+        /*.pagination{*/
+        /*    align-content: center;*/
+        /*}*/
+    </style>
+</head>
+<body>
+<a class="list-view" href="/nashtech/management">Back to Management</a>
+<a href="/nashtech/create-package-form">
+    <button class="button1" type="button">Add Package</button>
+</a>
+<br/>
+<br/>
+<a href="/nashtech/show-deliver-package">
+    <button id="addButton" class="button1" type="button">Deliver Package</button>
+</a>
+<br/>
+<h1 align="center">List package</h1>
+<table align="center">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Sender Name</th>
+        <th>Sender Email</th>
+        <th>Type</th>
+        <th>Cell ID</th>
+        <th>Status</th>
+        <th style="text-align: center">Actions</th>
+    </tr>
+    </thead>
+    <tbody th:each="package : ${packages}">
+    <tr>
+        <td th:text="${package.id}"></td>
+        <td th:text="${package.sender}"></td>
+        <td th:text="${package.senderEmail}"></td>
+        <td th:text="${package.type}"></td>
+        <td th:text="${package.cellId}"></td>
+        <td th:text="${package.status}"></td>
+        <td style="text-align: center">
+            <form method="GET" th:action="@{'/view-package/' + ${package.id}}">
+                <button id="button2" type="submit">Detail</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div class="pagination" align="center" style="margin-top: 10px">
+    <span th:if="${currentPage != 1}">
+        <a th:href="@{/packages(page=${currentPage - 1})}">&laquo;</a>
+    </span>
+
+    <!-- For displaying Page numbers. The when condition does not display a link for the current page -->
+    <span border="1" cellpadding="5" cellspacing="5" style="display:inline-block">
+        <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+            <span th:classappend="${currentPage == i}? 'current-page'">
+                <a th:href="@{/packages(page=${i})}" th:if="${currentPage != i}" th:text="${i}"></a>
+                <span th:if="${currentPage == i}" th:text="${i}"></span>
+            </span>
+        </span>
+    </span>
+
+    <!-- For displaying Next link -->
+    <span th:if="${currentPage lt totalPages}">
+        <a th:href="@{/packages(page=${currentPage + 1})}">&raquo;</a>
+    </span>
+</div>
+<!--<table align="center">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>ID</th>-->
+<!--        <th>Sender Name</th>-->
+<!--        <th>Sender Address</th>-->
+<!--        <th>Type</th>-->
+<!--        <th>Status</th>-->
+<!--        <th>Actions</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody th:each="package : ${packages}">-->
+<!--    <tr>-->
+<!--        <td th:text="${package.id}"></td>-->
+<!--        <td th:text="${package.sender}"></td>-->
+<!--        <td th:text="${package.senderEmail}"></td>-->
+<!--        <td th:text="${package.type}"></td>-->
+<!--        <td th:text="${package.status}"></td>-->
+<!--        <td>-->
+<!--            &lt;!&ndash; Here are the buttons for each package &ndash;&gt;-->
+<!--            <a th:href="@{'/packagelist/' + ${package.id}}">-->
+<!--                <button id="button2">View Details</button>-->
+<!--            </a>-->
+<!--        </td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+
+
+</body>
+</html>
